@@ -1023,7 +1023,7 @@
     <div id="particles-js"></div>
     
     <div class="sidebar">
-        <img src="https://i.pinimg.com/736x/e6/b2/77/e6b277027e9015a9ec5c017c0a444914.jpg" alt="Mikey Logo">
+        <img src="https://i.pinimg.com/736x/e6/b2/77/e6b277027e9015a9ec5c017c0a444914.jpg" alt="Mikey Logo" loading="lazy" onerror="this.onerror=null; this.src='https://via.placeholder.com/60x60/1a1a1a/ffffff?text=M';">
         <a href="#hero" data-tooltip="Home"><i class="fas fa-house"></i></a>
         <a href="#about" data-tooltip="About"><i class="fas fa-user"></i></a>
         <a href="#skills" data-tooltip="Skills"><i class="fas fa-bolt"></i></a>
@@ -1051,7 +1051,7 @@
                 <p>I help people secure their stuff and develop custom security solutions. If you're getting hacked or blackmailed, hit me up on Discord and I'll help you out.</p>
             </div>
             <div class="about-image">
-                <img src="https://static.wikia.nocookie.net/tokyo-revengers/images/4/4c/Manjiro_Sano_%2814th_Time_Leap_-_Manga%29.png/revision/latest?cb=20220411053554" alt="Mikey Profile">
+                <img src="https://static.wikia.nocookie.net/tokyo-revengers/images/4/4c/Manjiro_Sano_%2814th_Time_Leap_-_Manga%29.png/revision/latest?cb=20220411053554" alt="Mikey Profile" loading="lazy" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400/1a1a1a/ffffff?text=Mikey';">
             </div>
         </div>
 
@@ -1205,21 +1205,21 @@
         <div class="projects">
             <div class="project" data-aos="fade-up">
                 <div class="project-image-wrapper">
-                    <img src="https://lh3.googleusercontent.com/proxy/Tg11t4rXNlwfMfMKXOrRdyTQPw35FbIJ3NG5Rh2EGrOJ-ZwGUXa3q3PMSHmHqJVMNig2Y9bAcU_UP9AEnRHf5M3eAeJey2cp1yq_-yf2dtIqfVAaxU56UBafmi7rCS5Q7jU2M3r8xbVuTvW-SWlAfIDB5g" alt="Gbyt Crypter" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/141414/ffffff?text=Gbyt+Crypter'">
+                    <img src="https://lh3.googleusercontent.com/proxy/Tg11t4rXNlwfMfMKXOrRdyTQPw35FbIJ3NG5Rh2EGrOJ-ZwGUXa3q3PMSHmHqJVMNig2Y9bAcU_UP9AEnRHf5M3eAeJey2cp1yq_-yf2dtIqfVAaxU56UBafmi7rCS5Q7jU2M3r8xbVuTvW-SWlAfIDB5g" alt="Gbyt Crypter" loading="lazy" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x250/141414/ffffff?text=Gbyt+Crypter';">
                 </div>
                 <h3><i class="fas fa-shield-alt"></i> Gbyt Crypter</h3>
                 <p>RAT crypter I built that bypasses Windows Defender and other AV. Uses some cool obfuscation tricks and anti-analysis stuff to stay undetected. Works pretty well from what I've tested.</p>
             </div>
             <div class="project" data-aos="fade-up">
                 <div class="project-image-wrapper">
-                    <img src="https://ramantivirus.com/wp-content/uploads/2023/07/iStock-1257186093-1068x649-1.jpg" alt="AntiRat Tool" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/141414/ffffff?text=AntiRat+Tool'">
+                    <img src="https://ramantivirus.com/wp-content/uploads/2023/07/iStock-1257186093-1068x649-1.jpg" alt="AntiRat Tool" loading="lazy" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x250/141414/ffffff?text=AntiRat+Tool';">
                 </div>
                 <h3><i class="fas fa-shield-virus"></i> AntiRat</h3>
                 <p>Python tool I wrote that finds and removes RATs from your PC. Has real-time monitoring and some heuristics to catch remote access stuff. Actually pretty useful if you think you're infected.</p>
             </div>
             <div class="project" data-aos="fade-up">
                 <div class="project-image-wrapper">
-                    <img src="https://repository-images.githubusercontent.com/541184865/51cb9f04-4d3b-41d8-831e-8cdaced19330" alt="Webhook Spammer" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/141414/ffffff?text=Webhook+Spammer'">
+                    <img src="https://repository-images.githubusercontent.com/541184865/51cb9f04-4d3b-41d8-831e-8cdaced19330" alt="Webhook Spammer" loading="lazy" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x250/141414/ffffff?text=Webhook+Spammer';">
                 </div>
                 <h3><i class="fas fa-code"></i> Webhook Spammer</h3>
                 <p>Fast webhook spammer with threading and proxy support. You can customize messages and set rate limits. Gets the job done when you need to spam some webhooks for testing purposes.</p>
@@ -1330,15 +1330,30 @@
         });
 
         // Handle broken images - fallback to placeholder
-        document.querySelectorAll('.project img').forEach(img => {
-            img.addEventListener('error', function() {
-                this.style.display = 'none';
-                const wrapper = this.closest('.project-image-wrapper');
-                if (wrapper) {
-                    wrapper.style.background = 'linear-gradient(135deg, #1a1a1a 0%, #222 100%)';
-                    wrapper.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 18px;"><i class="fas fa-image" style="font-size: 48px;"></i></div>';
-                }
-            });
+        document.querySelectorAll('img').forEach(img => {
+            // Skip if already has error handled inline
+            if (!img.hasAttribute('data-error-handled')) {
+                img.addEventListener('error', function() {
+                    if (this.closest('.project-image-wrapper')) {
+                        // Project images
+                        this.style.display = 'none';
+                        const wrapper = this.closest('.project-image-wrapper');
+                        if (wrapper) {
+                            wrapper.style.background = 'linear-gradient(135deg, #1a1a1a 0%, #222 100%)';
+                            wrapper.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 18px;"><i class="fas fa-image" style="font-size: 48px;"></i></div>';
+                        }
+                    } else if (this.closest('.sidebar')) {
+                        // Sidebar logo
+                        this.onerror = null;
+                        this.src = 'https://via.placeholder.com/60x60/1a1a1a/ffffff?text=M';
+                    } else if (this.closest('.about-image')) {
+                        // About image
+                        this.onerror = null;
+                        this.src = 'https://via.placeholder.com/400x400/1a1a1a/ffffff?text=Mikey';
+                    }
+                    this.setAttribute('data-error-handled', 'true');
+                }, { once: true });
+            }
         });
 
         // Performance optimization - lazy load images
